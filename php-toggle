@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+##############
+## Switch php versions in OSX
+##############
+
+##############
+## Check arguments
+##############
+case $1 in
+    "php7.0"|"php7.1")
+        CMD=$1
+        shift
+        ;;
+    *)
+        CMD="help"
+        ;;
+esac;
+
+##############
+## Usage command
+##############
+if [ "${CMD}" = "help" ]; then
+    cat <<EOF
+Usage:
+${0}
+    help
+    php7.0
+        Switch to php 7.0 and stop previous version
+    php7.1
+        Switch to php 7.1 and stop previous version
+EOF
+        exit
+fi
+##############
+## End of usage command
+##############
+
+##############
+## Check current version of PHP
+##############
+php_version_dot=$(php -r "\$v=explode('.', PHP_VERSION ); echo implode('.', array_splice(\$v, 0, -1));")
+
+##############
+## Get version to what we need switch
+##############
+case ${CMD} in
+    "php7.0")
+        php_version=7.0
+        shift
+        ;;
+    "php7.1")
+        php_version=7.1
+        shift
+        ;;
+esac;
+
+##############
+## Check if already this version used
+##############
+if [[ ${php_version_dot} == *${php_version} ]]; then
+    echo "You already using php@${php_version}"
+else
+    ##############
+    ## Run commands for switching
+    ##############
+    brew unlink php@${php_version_dot} && brew link --force --overwrite php@${php_version}
+    brew services stop php@${php_version_dot} && brew services start php@${php_version}
+fi
