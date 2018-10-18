@@ -2,7 +2,7 @@
 
 I created small script for switching PHP version in OSX
 
-Right now it is supporting only 2 version - 7.0 and 7.1
+Right now it is supporting only 3 version - 7.0, 7.1 and 7.2
 
 ## Quick Installation
 
@@ -36,4 +36,18 @@ ln -s `pwd`/php-toggle /usr/local/bin/php-toggle
 Or
 ```
 mv php-toggle /usr/local/bin/
+```
+
+## Using
+
+for switching php version you need to run this command:
+
+```
+php-toggle php7.1
+```
+
+or shorter variant:
+
+```
+php-toggle 7.1
 ```
