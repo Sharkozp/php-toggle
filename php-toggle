@@ -7,8 +7,20 @@
 ## Check arguments
 ##############
 case $1 in
-    "php7.0"|"php7.1")
-        CMD=$1
+    'php5.6'|'5.6')
+        php_version=5.6
+        shift
+        ;;
+    'php7.0'|'7.0')
+        php_version=7.0
+        shift
+        ;;
+    'php7.1'|'7.1')
+        php_version=7.1
+        shift
+        ;;
+    'php7.2'|'7.2')
+        php_version=7.2
         shift
         ;;
     *)
@@ -24,6 +36,8 @@ if [ "${CMD}" = "help" ]; then
 Usage:
 ${0}
     help
+    php5.6 or 5.6
+        Switch to php 7.0 and stop previous version
     php7.0 or 7.0
         Switch to php 7.0 and stop previous version
     php7.1 or 7.1
@@ -41,24 +55,6 @@ fi
 ## Check current version of PHP
 ##############
 php_version_dot=$(php -r "\$v=explode('.', PHP_VERSION ); echo implode('.', array_splice(\$v, 0, -1));")
-
-##############
-## Get version to what we need switch
-##############
-case ${CMD} in
-    'php7.0'|'7.0')
-        php_version=7.0
-        shift
-        ;;
-    'php7.1'|'7.1')
-        php_version=7.1
-        shift
-        ;;
-    'php7.2'|'7.2')
-        php_version=7.2
-        shift
-        ;;
-esac;
 
 ##############
 ## Check if already this version used
