@@ -2,7 +2,7 @@
 
 I created small script for switching PHP version in OSX
 
-Right now it is supporting only 3 version - 7.0, 7.1 and 7.2
+Right now it is supporting only 5 version - 5.6, 7.0, 7.1, 7.2 and 7.3
 
 ## Quick Installation
 
